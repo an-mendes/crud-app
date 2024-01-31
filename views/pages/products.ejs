@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/style.css">
+  <title>ProdSync Dashboard - Product Management</title>
+</head>
+    <body>
+        <header>
+            <div class="logo"><a class ="landing" href="/">ProdSync</a></div>
+        </header>
+        <main>
+        <!-- template engine navbar-->
+        <%- include('../partials/sidenav') %>
+        <div class="dashboard-container">
+            <div class="container">
+              <div class="product-management-header">
+                <h1>Product Management</h1>
+                <label for="search">Search</label>
+                <input type="text" id="search" name="q" placeholder="Search...">
+                <label for="sort">Sort</label>
+                <select id="sort" name="sort">
+                    <option value="name">Name</option>
+                    <option value="price">Price</option>
+                    <option value="quantity">Quantity</option>
+                </select>
+                <button id="search-button" class="btn" onclick="fetchProducts()">Search</button>
+            </div>     
+              <ul class="product-list" id="product-list-container">
+                <% if (typeof products !== 'undefined' && products.length > 0) { %>
+                  <% products.forEach(product => { %>
+                    <li class="product-item">
+                      <div class="product-info">
+                        <h3><%= product.name || 'N/A' %></h3>
+                        <p><strong>Price:</strong> <%= product.price || 'N/A' %></p>
+                        <p><strong>Description:</strong> <%= product.description || 'N/A' %></p>
+                        <p><strong>Quantity:</strong> <%= product.quantity || 'N/A' %></p>
+                        <button class="delete-button" data-product-id="<%= product.id %>" onclick="deleteProduct('<%= product.id %>')">Delete</button>
+                        <button class="edit-button" onclick="openEditForm(event)" data-product="<%= JSON.stringify(product) %>">Edit</button>
+                      </div>
+                    </li>
+                  <% }) %>
+                <% } else { %>
+                  <li class="no-products">No products available</li>
+                <% } %>
+              </ul>
+            </div>            
+      
+            <div class="post-container">
+                <h2>Add a new product</h2>
+                <form id="product-form" method="POST" action="/products">
+                  <div>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                  </div>
+                  <div>
+                    <label for="price">Price</label>
+                    <input type="number" id="price" name="price" required>
+                  </div>
+                  <div>
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description" required>
+                  </div>
+                  <div>
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" required>
+                  </div>
+                  <input type="submit" value="Add Product" class="btn">
+                </form>
+              </div>
+              <div id="edit-form" style="display: none;">
+                <h2>Edit Product</h2>
+                <form id="product-edit-form">
+                  <input type="hidden" id="edit-product-id" name="id">
+                  <div>
+                    <label for="edit-name">Name</label>
+                    <input type="text" id="edit-name" name="name" required>
+                  </div>
+                  <div>
+                    <label for="edit-price">Price</label>
+                    <input type="number" id="edit-price" name="price" required>
+                  </div>
+                  <div>
+                    <label for="edit-description">Description</label>
+                    <input type="text" id="edit-description" name="description" required>
+                  </div>
+                  <div>
+                    <label for="edit-quantity">Quantity</label>
+                    <input type="number" id="edit-quantity" name="quantity" required>
+                  </div>
+                  <button type="submit">Save Changes</button>
+                </form>
+              </div>              
+          </div>
+        
+        </main>
+        <footer>
+            &copy; 2024 ProdSync. All rights reserved.
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script async>
+          function fetchProducts() {
+            const searchTerm = $('#search').val();
+            const sortOption = $('#sort').val();
+            console.log(searchTerm, sortOption)
+      
+            $.ajax({
+              url: `/products?q=${searchTerm}&sort=${sortOption}`,
+              method: 'GET',
+
+              success: function (data) {
+                // Update product list from JSON data
+                $('.product-list').html($(data).find('.product-list').html());
+              },
+              error: function (error) {
+                console.error('Error loading products:', error);
+              },
+            });
+          }
+
+          function deleteProduct(productId) {
+            $.ajax({
+              url: `/products/${productId}`,
+              method: 'DELETE',
+              success: function () {
+                console.log('Product deleted successfully.');
+                location.reload();
+              },
+              error: function (error) {
+                console.error('Error deleting product:', error);
+              }
+            });
+          }
+
+          function openEditForm(product) {
+            const button = event.target;
+
+            const productDetails = $(button).data('product');
+            // Auto-fill the edit form 
+              $('#edit-product-id').val(productDetails.id);
+              $('#edit-name').val(productDetails.name);
+              $('#edit-price').val(productDetails.price);
+              $('#edit-description').val(productDetails.description);
+              $('#edit-quantity').val(productDetails.quantity);
+
+              $('#edit-form').show();
+            }
+
+            $('#product-edit-form').submit(function (event) {
+              event.preventDefault();
+
+              // Collect the updated product details from the form
+              const updatedProduct = {
+                id: $('#edit-product-id').val(),
+                name: $('#edit-name').val(),
+                price: $('#edit-price').val(),
+                description: $('#edit-description').val(),
+                quantity: $('#edit-quantity').val(),
+              };
+              console.log(updatedProduct.id);
+
+              // PUT request
+              $.ajax({
+                url: `/products/${updatedProduct.id}`,
+                method: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(updatedProduct),
+                success: function (data) {
+                  $('#edit-form').hide();
+                  // Refresh the product list
+                  fetchProducts();
+                },
+                error: function (error) {
+                  console.error('Error updating product:', error);
+                },
+              });
+            });
+        </script>
+    </body>
+</html>

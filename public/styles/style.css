@@ -1,0 +1,275 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: white;
+    background-color: #ecf0f1;
+}
+
+:root {
+    --color-primary: #3498db;
+    --color-secondary: #2ecc71;
+    --color-tertiary: #34495e;
+}
+
+header {
+    background-color: var(--color-primary);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+main {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+    background-color: var(--color-secondary);
+}
+
+.hero {
+    padding: 50px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.landing {
+    text-decoration: none;
+    color: white;
+}
+
+.hero-content {
+    max-width: 600px;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.cta-button:hover {
+    background-color: var(--color-tertiary);
+}
+
+footer {
+    background-color: var(--color-tertiary);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+}
+
+/* Nav */
+.side-nav {
+    background-color: var(--color-primary);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+    width: 15%;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.side-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.side-nav a {
+    text-decoration: none;
+    color: white;
+    background-color: var(--color-tertiary);
+    display: block;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.side-nav a:hover {
+    background-color: var(--color-secondary);
+}
+
+/* Products */
+.product-list {
+    list-style: none;
+    padding: 0;
+    width: 70%;
+    color: white;
+    border-radius: 10px;
+    margin-left: 20%;
+    background-color: var(--color-secondary);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.product-item {
+    background-color: var(--color-primary);
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.product-info {
+    font-family: 'Arial', sans-serif;
+}
+
+.delete-button,
+.edit-button {
+    background-color: var(--color-tertiary);
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.delete-button:hover,
+.edit-button:hover {
+    background-color: var(--color-secondary);
+}
+
+.no-products {
+    font-family: 'Arial', sans-serif;
+    color: #777;
+    font-style: italic;
+    text-align: center;
+}
+
+.product-item:hover {
+    background-color: var(--color-tertiary);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.product-management-header {
+    background-color: var(--color-tertiary);
+    color: white;
+    padding: 20px;
+    margin-left: 30%;
+    width: 50%;
+    margin-top: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-management-header h1 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.product-management-header label {
+    display: block;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.product-management-header input,
+.product-management-header select,
+.product-management-header button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    font-size: 16px;
+}
+
+.product-management-header button {
+    background-color: var(--color-primary);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.product-management-header button:hover {
+    background-color: var(--color-tertiary);
+}
+
+/* Form*/
+form {
+    max-width: 400px;
+    margin-left: 40%;
+    background-color: var(--color-secondary);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    color: white;
+}
+
+form input,
+form select,
+form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    font-size: 16px;
+}
+
+form button {
+    background-color: var(--color-primary);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+form button:hover {
+    background-color: var(--color-tertiary);
+}
+
+#edit-form,
+.no-products {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#edit-form,
+.no-products {
+    animation: fadeIn 0.5s ease-in-out;
+}
