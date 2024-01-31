@@ -1,4 +1,4 @@
-# CRUD aplikacija rađena u node-u s Express.js frameworkom i EJS template-engineom
+# CRUD aplikacija napravljena u Node.js-u s Express.js frameworkom i EJS template engineom
 
 ## Funkcionalnosti
 - **Pretraživanje i Sortiranje**
