@@ -1,16 +1,16 @@
-# CRUD aplikacija napravljena u Node.js-u s Express.js frameworkom i EJS template engineom
+# CRUD application built in Node.js with Express.js framework and EJS template engine
 
-## Funkcionalnosti
-- **Pretraživanje i Sortiranje**
-- **Dodavanje Proizvoda**
-- **Uređivanje i Brisanje**
+## Functionalities:
+- **Search and sorting**
+- **Adding products**
+- **Editing and deleting products**
 
-### Instalacija / Potrebni programi:
-- Node.js i npm
+### Installation and dependencies:
+- Node.js and npm
 - SQLite
 
-1. Kloniranje repozitorija:
-2. Navigirajte u repozitorij pomoću cd
-3. Pokrenite: npm install
-4. Pokrenite: node app.js ili npm start
-5. Otvorite http://localhost:3000 u web pregledniku
+### Kloniranje repozitorija:
+1. Navigate to the repository using cd
+2. Run: npm install
+3. Run: node app.js or npm start
+4. Open http://localhost:3000 in a web browser
