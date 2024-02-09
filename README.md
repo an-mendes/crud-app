@@ -9,7 +9,7 @@
 - Node.js and npm
 - SQLite
 
-### Kloniranje repozitorija:
+### Cloning the repository:
 1. Navigate to the repository using cd
 2. Run: npm install
 3. Run: node app.js or npm start
